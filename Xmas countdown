@@ -1,0 +1,87 @@
+
+<head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 50vh;
+            margin: 10px;
+            background-color: black;
+            position: relative; /* Added to make relative positioning possible */
+        }
+        #countdown-container {
+            text-align: center;
+            color: white;
+            animation: pop-out 1s ease-in-out;
+        }
+        #countdown {
+            font-size: 150px;
+            color: red;
+            background-color: black;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 5px;
+        }
+        #santa-image {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 100px;
+        }
+        #created-by {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: white;
+            font-style: italic;
+        }
+        #name {
+            font-weight: bold;
+        }
+        @keyframes pop-out {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown-container">
+        <h1>Christmas Countdown</h1>
+        <div id="countdown"></div>
+    </div>
+    <img id="santa-image" src="/storage/emulated/0/Download/santa-claus-png-34015 (1).png" alt="Santa Claus Image">
+    <div id="created-by">
+        Created by:
+        <div id="name">Prince David Ochai</div>
+    </div>
+
+    <script>
+        // Set the date of Christmas
+        const christmasDate = new Date('2023-12-25T00:00:00').getTime();
+
+        // Update the countdown every second
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const timeRemaining = christmasDate - now;
+
+            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdown);
+                document.getElementById('countdown').innerHTML = "Merry Christmas!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
